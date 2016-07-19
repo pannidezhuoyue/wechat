@@ -79,47 +79,55 @@ class WeChat{
     {
         //get post data, May be due to the different environments
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        $postObj = simplexml_load_string($postStr,'simpleXMLElement',LIBXML_NOCDATA);
+        switch ($postObj->MsgType) {
+            case 'text':
+                $this->_doText($postObj);
+                break;
 
-        //extract post data
-        if (!empty($postStr)){
-                /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
-                   the best way is to check the validity of xml by yourself */
-                libxml_disable_entity_loader(true);
-                $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-                $fromUsername = $postObj->FromUserName;
-                $toUsername = $postObj->ToUserName;
-                $keyword = trim($postObj->Content);
-                $time = time();
-                $textTpl = "<xml>
-                            <ToUserName><![CDATA[%s]]></ToUserName>
-                            <FromUserName><![CDATA[%s]]></FromUserName>
-                            <CreateTime>%s</CreateTime>
-                            <MsgType><![CDATA[%s]]></MsgType>
-                            <Content><![CDATA[%s]]></Content>
-                            <FuncFlag>0</FuncFlag>
-                            </xml>";             
-                if(!empty( $keyword ))
-                {
-                    switch ($keyword) {
-                        case 'zhangzhuo':
-                            $contentStr = '叛逆的卓越';
-                            break;
-                        
-                        default:
-                            $contentStr = "Welcome to wechat world!";
-                            break;
-                    }
-                    $msgType = "text";
-                    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                    echo $resultStr;
-                }else{
-                    echo "Input something...";
-                }
+            case 'image':
+                $this->_doImage($postObj);
+                break;
 
-        }else {
-            echo "";
-            exit;
+            case 'voice':
+                $this->_doVoice($postObj);
+                break;
+
+            case 'event':
+                $this->_doEvent($postObj);
+                break;
+            
+            default:
+                # code...
+                break;
         }
+    }
+
+    private function _doText($postObj){
+        $fromUsername = $postObj->FromUserName;
+        $toUsername = $postObj->ToUserName;
+        $keyword = trim($postObj->Content);
+        $time = time();
+        $textTpl = "<xml>
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Content><![CDATA[%s]]></Content>
+                    <FuncFlag>0</FuncFlag>
+                    </xml>";             
+        switch ($keyword) {
+            case 'zhangzhuo':
+                $contentStr = '叛逆的卓越';
+                break;
+            
+            default:
+                $contentStr = "Welcome to wechat world!";
+                break;
+        }
+        $msgType = "text";
+        $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+        echo $resultStr;
     }
         
     private function checkSignature()
