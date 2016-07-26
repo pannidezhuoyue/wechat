@@ -3,10 +3,11 @@ class WeChat{
     private $_appid;
     private $_appsecret;
     private $_token;
-    public function __construct($_appid, $_appsecret,$_token){
+    public function __construct($_appid, $_appsecret,$_token,$_tulingKey){
         $this->_appid = $_appid;
         $this->_appsecret = $_appsecret;
         $this->token = $_token;
+        $this->_tulingKey = $_tulingKey;
     }
 
     public function _request($curl,$https = true,$method = 'GET',$data = null){
@@ -122,7 +123,20 @@ class WeChat{
                 break;
             
             default:
-                $contentStr = "Welcome to wechat world!";
+                $url = 'http://www.tuling123.com/openapi/api';
+                $data = [
+                    "key" => $this->_tulingKey,
+                    "info" => $keyword,
+                    "userid" => $fromUsername
+                ];
+                $o = "";
+                foreach ( $data as $k => $v )
+                {
+                    $o.= "$k=" . urlencode( $v ). "&" ;
+                }
+                $data = substr($o,0,-1);
+                $answer = json_decode($this->_request($url,false,'POST',$data),true);
+                $contentStr = isset($answer['text']) ? $answer['text'] : '风太大,没听清！';
                 break;
         }
         $msgType = "text";
