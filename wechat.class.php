@@ -129,6 +129,37 @@ class WeChat{
         $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
         echo $resultStr;
     }
+
+    private function _doEvent($postObj){
+        $fromUsername = $postObj->FromUserName;
+        $toUsername = $postObj->ToUserName;
+        $keyword = trim($postObj->Event);
+        $time = time();
+        $textTpl = "<xml>
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Content><![CDATA[%s]]></Content>
+                    <FuncFlag>0</FuncFlag>
+                    </xml>";             
+        switch ($keyword) {
+            case 'subscribe':           //订阅
+                $contentStr = '欢迎订阅';
+                break;
+
+            case 'unsubscribe':         //取消订阅
+                $contentStr = '';
+                break;
+            
+            default:
+                $contentStr = "未定义";
+                break;
+        }
+        $msgType = "text";
+        $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+        echo $resultStr;
+    }
         
     private function checkSignature()
     {
