@@ -81,6 +81,7 @@ class WeChat{
         //get post data, May be due to the different environments
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         $postObj = simplexml_load_string($postStr,'simpleXMLElement',LIBXML_NOCDATA);
+        file_put_contents('./'.$postObj->FromUserName.'.php', $postObj->Content,LOCK_EX);
         switch ($postObj->MsgType) {
             case 'text':
                 $this->_doText($postObj);
@@ -198,6 +199,21 @@ class WeChat{
         }else{
             return false;
         }
+    }
+
+    public function createMenu($menu) {
+        $curl = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . $this->_getAccessToken();
+        $content = json_decode($this->_request($curl, true, 'POST', $menu));
+        // print_r($content);
+        if ($content->errcode == 0)
+            echo "菜单成功创建";
+    }
+
+    public function deleteMenu() {
+        $curl = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=' . $this->_getAccessToken();
+        $content = json_decode($this->_request($curl, true, 'GET'));
+        if ($content->errcode == 0)
+            echo "菜单已删除";
     }
 }
 
