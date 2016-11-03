@@ -1,0 +1,1 @@
+.show()   IE => display:inline;   Chrome/FireFox => display:block;
