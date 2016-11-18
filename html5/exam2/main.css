@@ -19,9 +19,9 @@ body{background-color: #ECECEC;margin:0;position: relative;-moz-user-select:none
 .textarea{width: 70vw;resize: none;min-height: 15vh;height: 10vh;font-size: 5vw;}
 
 .swiper-wrapper{min-height: 90vh;}
-.swiper-container{top: 10vh;}
+.swiper-container{}
 
-.head{background-color: #64B995;width:100vw;min-height: 10vh;height: 10vh; font-size: 5vw;color: #FEFEFE;position: fixed;z-index: 999;}
+.head{background-color: #64B995;width:100vw;min-height: 10vh;height: 10vh; font-size: 5vw;color: #FEFEFE;}
 .left{display: inline; float:left; line-height: 10vh;height: 10vh;width: 33vw;text-align: center;}
 .middle{display: inline;float: left; width: 33vw;line-height: 10vh;height: 10vh;text-align: center;}
 .line{display: inline;float: left;border-left: 0.5vw solid;color: #FEFEFE;line-height: 10vh;height: 5vh;margin-top: 2.5vh;}

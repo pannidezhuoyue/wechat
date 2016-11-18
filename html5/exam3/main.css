@@ -1,0 +1,28 @@
+body{background-color: #ECECEC;margin:0;position: relative;-moz-user-select:none;-webkit-user-select:none;user-select:none; }
+/*
+    singleAnswer  binaryChoice
+*/
+.question{margin:5vh 5vw 5vh 5vw;font-size: 5vw;letter-spacing: 0.5vw;}
+.title{}
+.t_title{width: 8vw;float: left;}
+.t_content{width:80vw;float: left;margin-bottom: 5vh;}
+.content{}
+.c_option{float:left;width: 80vw;}
+.c_letter{width: 15vw;float: left;}
+.c_span{width: 65vw;float: left;margin-bottom: 5vh;}
+
+/*
+    fillBlankAnswer
+*/
+.c_fill_letter{width: 10vw;float: left;}
+.c_fill_span{width: 70vw;float: left;margin-bottom: 5vh;}
+.textarea{width: 70vw;resize: none;min-height: 15vh;height: 10vh;font-size: 5vw;}
+
+.swiper-wrapper{min-height: 90vh;}
+.swiper-container{}
+
+.head{background-color: #64B995;width:100vw;min-height: 10vh;height: 10vh; font-size: 5vw;color: #FEFEFE;}
+.left{display: inline; float:left; line-height: 10vh;height: 10vh;width: 33vw;text-align: center;}
+.middle{display: inline;float: left; width: 33vw;line-height: 10vh;height: 10vh;text-align: center;}
+.line{display: inline;float: left;border-left: 0.5vw solid;color: #FEFEFE;line-height: 10vh;height: 5vh;margin-top: 2.5vh;}
+.right{display: inline;float:right;line-height: 8vh;height: 8vh;width: 32vw;text-align: center;margin-top: 1vh;}

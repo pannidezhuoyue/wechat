@@ -5,50 +5,52 @@ data = {
     'question_4': '',
     'question_5': '',
     'question_6': '',
-    'question_7': {
-        'option_7_1': '',
-        'option_7_2': '',
-        'option_7_3': '',
+    'question_7': '',
+    'question_8': '',
+    'question_9': '',
+    'question_10': '',
+    'question_11': '',
+    'question_12': '',
+    'question_13': '',
+    'question_14': '',
+    'question_15': '',
+    'question_16': {
+        'option_16_1': ''
     },
-    'question_8': {
-        'option_8_1': ''
+    'question_17': {
+        'option_17_1': ''
     },
-    'question_9': {
-        'option_9_1': ''
+    'question_18': {
+        'option_18_1': ''
     },
-    'question_10': {
-        'option_10_1': ''
-    }
+    'question_19': {
+        'option_19_1': ''
+    },
+    'question_20': {
+        'option_20_1': ''
+    },
 };
 rightData = {
     'question_1': 'option_1_1',
-    'question_2': 'option_2_1',
-    'question_3': 'option_3_1',
-    'question_4': 'option_4_1',
-    'question_5': 'option_5_1,option_5_2',
+    'question_2': 'option_2_2',
+    'question_3': 'option_3_3',
+    'question_4': 'option_4_4',
+    'question_5': 'option_5_1',
     'question_6': 'option_6_1,option_6_2',
-    'question_7': {
-        'option_7_1': '123',
-        'option_7_2': '123',
-        'option_7_3': '123',
-    },
-    'question_8': {
-        'option_8_1': '456'
-    }
+    'question_7': 'option_7_1,option_7_2',
+    'question_8': 'option_8_1,option_8_2',
+    'question_9': 'option_9_1,option_9_2',
+    'question_10': 'option_10_1,option_10_2',
+    'question_11': 'option_11_1',
+    'question_12': 'option_12_2',
+    'question_13': 'option_13_1',
+    'question_14': 'option_14_2',
+    'question_15': 'option_15_1',
 };
-point = [
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10
-];
+point = [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5];
 window.onload = function() {
     //cooike回复考生答案
-    var answer = $.getCookie("exam_1");
+    var answer = $.getCookie("exam_3");
     if (answer != '') {
         recoverAnswer(answer);
     }
@@ -68,7 +70,7 @@ window.onload = function() {
     countdown = 3600;
     countdownSubmit();
     $('#submit').click(function() {
-        $.MsgBox.Confirm('提示','您确认交卷?',submitPaper)
+        $.MsgBox.Confirm('提示','您确认交卷?',submitPaper);
     });
     //自动保存答案
     $(':input').change(function() {
@@ -93,50 +95,36 @@ function countdownSubmit() {
 };
 //获取所有用户答案
 function getAnswer(nead) {
-    data.question_1 = typeof($('input[name=question_1]:checked').val()) != 'undefined' ? $('input[name=question_1]:checked').val() : '';
-    data.question_2 = typeof($('input[name=question_2]:checked').val()) != 'undefined' ? $('input[name=question_2]:checked').val() : '';
-    data.question_3 = typeof($('input[name=question_3]:checked').val()) != 'undefined' ? $('input[name=question_3]:checked').val() : '';
-    data.question_4 = typeof($('input[name=question_4]:checked').val()) != 'undefined' ? $('input[name=question_4]:checked').val() : '';
-    data.question_5 = '';
-    $('input[name=question_5]:checked').each(function(i) {
-        if (0 == i) {
-            data.question_5 = $(this).val();
-        } else {
-            data.question_5 += ("," + $(this).val());
-        }
-    });
-    data.question_6 = '';
-    $('input[name=question_6]:checked').each(function(i) {
-        if (0 == i) {
-            data.question_6 = $(this).val();
-        } else {
-            data.question_6 += ("," + $(this).val());
-        }
-    });
-    $.each(data.question_7,
-    function(index, value) {
-        data.question_7[index] = $('#' + index).val();
-    });
-    $.each(data.question_8,
-    function(index, value) {
-        data.question_8[index] = $('#' + index).val();
-    });
-    $.each(data.question_9,
-    function(index, value) {
-        data.question_9[index] = $('#' + index).val();
-    });
-    $.each(data.question_10,
-    function(index, value) {
-        data.question_10[index] = $('#' + index).val();
-    });
-    $.setCookie("exam_1", JSON.stringify(data), 10);
+    for (var i = 1; i < 6; i++) {
+        data['question_'+i] = typeof($('input[name=question_'+i+']:checked').val()) != 'undefined' ? $('input[name=question_'+i+']:checked').val() : '';
+    }
+    for (var i = 6; i < 11; i++) {
+        data['question_'+i] = '';
+        $('input[name=question_'+i+']:checked').each(function(i) {
+            if (0 == i) {
+                data['question_'+i] = $(this).val();
+            } else {
+                data['question_'+i] += ("," + $(this).val());
+            }
+        });
+    }
+    for (var i = 11; i < 16; i++) {
+        data['question_'+i] = typeof($('input[name=question_'+i+']:checked').val()) != 'undefined' ? $('input[name=question_'+i+']:checked').val() : '';
+    }
+    for (var i = 16; i < 21; i++) {
+        $.each(data['question_'+i],
+        function(index, value) {
+            data['question_'+i][index] = $('#' + index).val();
+        });
+    }
+    $.setCookie("exam_3", JSON.stringify(data), 10);
     if (nead) {
         return data;
     }
 }
 //恢复答案
 function recoverAnswer(temp) {
-    var temp = $.getCookie("exam_1");
+    var temp = $.getCookie("exam_3");
     var answer = jQuery.parseJSON(unescape(temp));
     $.each(answer,
     function(index, value) {
@@ -165,8 +153,11 @@ function submitPaper(){
         }
         pointIndex++;
     });
-    $.setCookie("exam_1", '', 10);
-    $.MsgBox.Alert('消息','您客观题得分为:'+score+'分.');
+    $.setCookie("exam_3", '', 10);
+    $.MsgBox.Confirm1('消息','您客观题得分为:'+score+'分.',goback);
+}
+function goback(){
+    this.location.href='../exam_list.html';
 }
 (function($) {
     if (!$.setCookie) {
@@ -214,7 +205,12 @@ function submitPaper(){
             GenerateHtml("confirm", title, msg);
             btnOk(callback);
             btnNo();
-        }
+        },
+        Confirm1: function(title, msg, callback) {
+            GenerateHtml("confirm1", title, msg);
+            btnOk(callback);
+            btnNo();
+        },
     }
 
     //生成Html
@@ -232,6 +228,9 @@ function submitPaper(){
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
             _html += '<input id="mb_btn_no" type="button" value="取消" />';
         }
+        if (type == "confirm1") {
+            _html += '<input id="mb_btn_ok" type="button" value="确定" />';
+        }
         _html += '</div></div>';
 
         //必须先将_html添加到body，再设置Css样式
@@ -245,7 +244,7 @@ function submitPaper(){
         $("#mb_box").css({
             width: '100%',
             height: '100%',
-            zIndex: '99999',
+            zIndex: '998',
             position: 'fixed',
             filter: 'Alpha(opacity=60)',
             backgroundColor: 'black',
@@ -255,7 +254,7 @@ function submitPaper(){
         });
 
         $("#mb_con").css({
-            zIndex: '999999',
+            zIndex: '999',
             width: '80vw',
             position: 'fixed',
             backgroundColor: 'White',

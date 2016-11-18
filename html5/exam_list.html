@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考试列表</title>
+    <meta name="author" content="vikie.Q">
+    <meta name="keywords" content="PHP,HTML,CSS,JAVASCRIPT">
+    <meta name="description" content="大连奥瑞文网络技术有限公司">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        /* 全局 */
+        html,body{width:100%;height:100%;background-color: #f4f4f4;}
+        /* img {max-width:100%;height:auto;} */
+        ul,li,body,html,div,span,dl,ol,p,pre,header,img,footer,article,a{margin:0;padding: 0;box-sizing:border-box;}
+        /* 列表开始 */
+        ul li ul li{clear: both}
+        ul,li{list-style: none;border: 0;}
+        ul li{float:left;}
+        ul{clear: both;min-height:85px;height:auto;}
+        .examTitle{text-align: center;color: #e2e2e2;background-color: #00aa7f;}
+        .container{height:70%;width:100%;}
+        .examList1,.examList2{background-color: #fff;}
+        .examList1>a>ul,.examList2>a>ul{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top: 10px;padding-top: 4px;text-align: center;}
+        /* .examLeft{width:30%;}
+        .examRight{right:70%;} */
+        /* 列表结束 */
+        /* 链接开始 */
+        a:link{text-decoration: none;color:#d8d8d8;}
+        a:hover,a:visited{text-decoration: none;color:#f3f3f3;}
+        a:active{text-decoration: none;color:#4b4b4b;}
+        a.pageBtn{display: block;width:40%;padding: 12px 16px;text-align:center;background-color: #00aa7f;}
+        /* 链接结束 */
+        /* 按钮开始 */
+        span{color:#6c6c6c;}
+        .prePage{float: left;margin-left: 0px;}
+        .nextPage{float:left;margin-right: 0px;}
+        /* 按钮结束 */
+        /* 底部开始 */
+        .page{margin-top:20px;}
+        .pageNum{display: block;width: 20%;float: left;text-align: center;line-height: 48px;}
+        /* 底部结束 */
+        /* 弹出层控件开始 */
+          .modalDialog {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 99999;
+            opacity:0;
+            -webkit-transition: opacity 250ms ease-in;
+            -moz-transition: opacity 250ms ease-in;
+            transition: opacity 250ms ease-in;
+            pointer-events: none;
+        }
+
+        .modalDialog:target {
+            opacity:1;
+            pointer-events: auto;
+        }
+
+        .modalDialog > div {
+            width: 80%;
+            position: relative;
+            margin: 20% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 10px;
+            background: #fff;
+            /* background: -o-linear-gradient(bottom, rgb(0,170,127) 25%, rgb(240,245,237) 63%);
+            background: -moz-linear-gradient(bottom, rgb(0,170,127) 25%, rgb(240,245,237) 63%);
+            background: -webkit-linear-gradient(bottom, rgb(0,170,127) 25%, rgb(240,245,237) 63%); */
+        }
+
+        .close,.close:active {
+            background: #606061;
+            color: #FFFFFF;
+            line-height: 25px;
+            position: absolute;
+            right: 10px;
+            text-align: center;
+            top: 10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+        }
+
+        .close:hover { background: #57a2d1; }
+
+        /* 弹出层结束 */
+
+        /* 响应式布局 */
+        @media only screen and (min-width: 100px) and (max-width: 640px) {
+            body{
+                width: 100%;
+            }
+            .modalDialog > div{
+                margin: 50% auto;
+            }
+        }
+        @media only screen and (min-width: 641px){
+            body{
+                width: 420px;
+            }
+        }
+    </style>
+    <script type="text/javascript" src="./js/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <header class="examTitle"><h2 style="margin-top:0px;padding-top:10px;height: 46px;">考试列表</h2></header>
+    <article class="container">
+        <div class="examList1">
+            <a href="./exam_notice1.html">
+                <ul>
+                    <li>
+                        <ul>
+                            <li><img src="./images/examTitle.png" alt="图片1" width="100" height="80"></li>
+                        </ul>
+                    </li>
+                    <li>
+                            <ul>
+                                <li><span>模拟考试系统测试1
+</span></li>
+                                <li><span>考试时间：11-18 9:00 ～ 12-30 9:00
+</span></li>
+                                <li><span>总分：100分     及格：60分
+</span></li>
+                            </ul>
+                    </li>
+                </ul>
+            </a>
+
+            <a href="./exam_notice2.html">
+                <ul>
+                    <li>
+                        <ul>
+                            <li><img src="./images/examTitle.png" alt="图片1" width="100" height="80"></li>
+                        </ul>
+                    </li>
+                    <li>
+                            <ul>
+                                <li><span>模拟考试系统测试2
+</span></li>
+                                <li><span>考试时间：11-18 9:00 ～ 12-30 9:00
+</span></li>
+                                <li><span>总分：100分     及格：60分
+</span></li>
+                            </ul>
+                    </li>
+                </ul>
+            </a>
+        </div>
+    </article>
+    <div class="page">
+        <!-- <a id="" class="prePage pageBtn" href="javascript:void(0)">上一页</a>
+        <span id="pageNum" class="pageNum">1/1</span>
+        <a id="" class="nextPage pageBtn" href="javascript:void(0)">下一页</a> -->
+    </div>
+
+    <div id="openModal" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h3>提示</h3>
+            <p id="noticeContent">已经是第一页</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $('#prePage').click(function(){
+            $('#noticeContent').html('已经是第一页');
+            location.href='#openModal';
+        });
+        $('#nextPage').click(function() {
+            $('#noticeContent').html('已经是最后一页');
+            location.href='#openModal';
+        });
+    </script>
+</body>
+</html>
